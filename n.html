@@ -1,0 +1,82 @@
+<?php
+// In a real-world scenario, you'd connect to a database to fetch posts and comments.
+// For simplicity, we'll use static data in this example.
+
+$posts = [
+    [
+        'id' => 1,
+        'content' => 'Post content goes here...',
+        'comments' => ['Comment 1', 'Comment 2'],
+    ],
+    // Add more posts as needed
+];
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Social Media</title>
+    <style>
+        /* Styles unchanged from the previous example */
+
+        .post {
+            border: 1px solid #ddd;
+            margin-bottom: 20px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+
+        .comment {
+            margin-top: 10px;
+            padding: 5px;
+            border: 1px solid #eee;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>My Social Media</h1>
+    </header>
+
+    <section>
+        <nav>
+            <!-- Navigation links, user profile, etc. can be added here -->
+            <p>Navigation</p>
+        </nav>
+
+        <main id="main-content">
+            <!-- Content area, posts, comments, etc. can be added here -->
+            <?php foreach ($posts as $post): ?>
+                <div class="post" id="post<?= $post['id'] ?>">
+                    <p><?= $post['content'] ?></p>
+                    <button onclick="toggleComments('post<?= $post['id'] ?>')">Show Comments</button>
+                    <div id="comments-post<?= $post['id'] ?>" style="display: none;">
+                        <?php foreach ($post['comments'] as $comment): ?>
+                            <div class="comment"><?= $comment ?></div>
+                        <?php endforeach; ?>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+        </main>
+    </section>
+
+    <footer>
+        <p>&copy; 2024 My Social Media. All rights reserved.</p>
+    </footer>
+
+    <script>
+        // JavaScript code for handling interactivity
+
+        function toggleComments(postId) {
+            const commentsSection = document.getElementById(`comments-${postId}`);
+            commentsSection.style.display = commentsSection.style.display === 'none' ? 'block' : 'none';
+        }
+    </script>
+
+</body>
+</html>
